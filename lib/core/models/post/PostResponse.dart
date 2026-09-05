@@ -1,11 +1,7 @@
 import 'Data.dart';
 
 class PostResponse {
-  PostResponse({
-    this.code,
-    this.message,
-    this.messageKh,
-    this.data,});
+  PostResponse({this.code, this.message, this.messageKh, this.data});
 
   PostResponse.fromJson(dynamic json) {
     code = json['code'];
@@ -28,5 +24,4 @@ class PostResponse {
     }
     return map;
   }
-
 }

@@ -1,16 +1,23 @@
 class RegisterResponse {
-  String? message;
-  bool? success;
-
   RegisterResponse({
     this.message,
-    this.success,
+    this.messageKh,
+    this.messageCh,
+    this.code,
+    this.data,
   });
 
-  factory RegisterResponse.fromJson(Map<String, dynamic> json) {
-    return RegisterResponse(
-      message: json['message'],
-      success: json['success'] ?? json['status'],
-    );
+  RegisterResponse.fromJson(dynamic json) {
+    message = json['message'];
+    messageKh = json['messageKh'];
+    messageCh = json['messageCh'];
+    code = json['code'];
+    data = json['data'];
   }
+
+  String? message;
+  String? messageKh;
+  String? messageCh;
+  String? code;
+  dynamic data;
 }

@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:post_mobile_application/binding/initail_binding.dart';
+import 'package:get/get.dart';
+import 'package:post_mobile_application/modules/admin/dashboard/controller/dashboard_controller.dart';
 import 'package:post_mobile_application/routes/app_route_name.dart';
-import 'package:post_mobile_application/routes/app_routes.dart';
+import 'package:post_mobile_application/widgets/appbar_custom_widget.dart';
 
-Future<void> main() async {
-  await GetStorage.init();
-  runApp(const MyApp());
-}
+class DashboardView extends GetView<DashboardController> {
+  const DashboardView({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialBinding: InitialBinding(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRouteName.splash,
-      getPages: AppRoutes.getAllRoutes(),
-      title: 'Post Mobile Application',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-      ),
-    );
+    return Obx(() {
+      return Scaffold(
+        appBar: AppbarCustomWidget(title: "Dashboard"),
+        body: Container(
+          padding: EdgeInsets.all(10),
+          child: GridView.builder(
+            itemCount: controller.menuList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+            ),
+            itemBuilder: (context, index) {
+              var menu = controller.menuList[index];
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed(menu.routeName ?? AppRouteName.adminDashboard);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.cyan,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "${menu.nameEn}",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    });
   }
 }
