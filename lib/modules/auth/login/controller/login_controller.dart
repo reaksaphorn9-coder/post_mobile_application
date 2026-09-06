@@ -35,7 +35,7 @@ class LoginController extends GetxController {
       Get.snackbar("Success", "Login Successfully");
       Get.offNamed(AppRouteName.home);
     } else {
-      Get.snackbar("Success", "Your username and passowrd incorrect");
+      Get.snackbar("Success", "Your username And passowrd incorrect");
     }
   }
 }
