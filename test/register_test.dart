@@ -41,7 +41,7 @@ void main() {
       phoneNumber: '0123456789',
       password: 'Password@123',
       confirmPassword: 'Password@123',
-      role: 'USER',
+      role: 'user',
       profile: '',
     );
 
